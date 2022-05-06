@@ -1,4 +1,8 @@
 <%= form_with(model: @user, local: true) do |f| %>
+  <% if @user.errors.any? %>
+    <% @data = @user %>
+    <%= render 'alerts/alert_multiply_msg' %>  
+  <% end %>
   <div class="card">
     <h2> Sign Up </h2> 
     <br />

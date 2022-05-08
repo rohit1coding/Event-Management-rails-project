@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-expand-md navbar-dark bg-primary">
   <div class="container-fluid navbar-container">
-    <img class="navbar-logo navbar-brand" src="assets/navbar_logo.png" alt="navbar logo" />
+    <%= image_tag "navbar_logo.png", class: "navbar-logo navbar-brand" %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,7 +8,7 @@
       <ul class="navbar-nav navbar-right">
         <% if logged_in %>
           <li class="nav-item">
-            <%= link_to 'Home', root_path, class:"nav-link active" %>
+            <%= link_to 'Event', root_path, class:"nav-link active" %>
           </li>
           <li class="nav-item">
             <%= link_to current_user.name, root_path, class:"nav-link active" %>

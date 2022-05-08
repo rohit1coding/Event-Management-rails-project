@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# User.all.each do |user|
+#   user.events.create(name: "Picknik :- #{user.id}")
+#   user.events.create(name: "Trip :- #{user.id}")
+# end

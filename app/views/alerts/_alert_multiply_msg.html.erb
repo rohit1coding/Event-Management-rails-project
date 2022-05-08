@@ -1,7 +1,7 @@
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
   <h2 class="text-danger"> Errors: </h2>
   <ul>
-    <% @data.errors.full_messages.each do |message| %>
+    <% error_messages.errors.full_messages.each do |message| %>
       <li> <%= message %> </li>
     <% end %>
   </ul>

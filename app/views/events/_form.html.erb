@@ -1,0 +1,11 @@
+<%= form_with(model: event) do |f| %>
+  <% if event.errors.any? %>
+    <%= render 'alerts/alert_multiply_msg', error_messages: event %>
+  <% end %>
+  <div class="field form-group">
+    <%= f.text_field :name,class:"form-control",placeholder:"Event Name" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", class:"btn btn-primary my-2" %>
+  </div>
+<% end %>

@@ -13,7 +13,86 @@
  *= require_tree .
  *= require_self
  */
+/* $screen-size: 1400px; */
 
 html {
+  --screen-size: 1400px;
+  --card-max-width: 600px;
   font-size: 20px;
+}
+.container {
+  position: relative;
+  max-width: var(--screen-size);
+  margin: 0 auto;
+  margin-top: 100px;
+}
+/* Navbar Section */
+.navbar {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid;
+}
+.navbar-container {
+  margin: 0 auto;
+  max-width: var(--screen-size);
+}
+.navbar-logo {
+  width: 55px;
+}
+.navbar-nav {
+  margin-right: 5rem;
+  padding: 0.5rem 0;
+  margin-left: auto;
+}
+.nav-item {
+  margin: 0 1rem;
+}
+/* Form Card Login/SignUp */
+.card {
+  max-width: var(--card-max-width);
+  margin: 2rem auto;
+  padding: 1rem;
+  border: 1px solid rgb(5, 14, 1);
+  border-radius: 25px;
+  text-align: center;
+  background-color: gainsboro;
+}
+.card-header {
+  text-align: center;
+  background-color: rgb(21, 111, 248);
+  color: white;
+  padding: 10px;
+  border-radius: 50px !important;
+}
+.form-control {
+  /* padding: 100px 0; */
+  border-radius: 30px;
+}
+.form-group {
+  padding: 12px 0;
+}
+/* bootstrap btn  */
+.btn {
+  /* border-radius: 10px !important; */
+}
+@media only screen and (max-width: 767px) {
+  .navbar {
+    text-align: center;
+  }
+  .navbar-logo {
+    width: 70px;
+  }
+  .navbar-nav {
+    margin: 0;
+    padding: 0;
+    border-bottom: 2px solid white;
+  }
+  .nav-item {
+    margin: 0;
+    padding: 10px 0px;
+    border-top: 1px solid whitesmoke;
+  }
+  .card {
+    width: 100%;
+  }
 }

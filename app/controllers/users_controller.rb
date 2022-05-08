@@ -7,9 +7,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save 
       flash[:notice] = "Account created successfully."
-      redirect_to root_path
+      redirect_to login_path
     else
-      # flash.now[:alert] = "Enter a valid input!"
       render 'new'
     end
   end

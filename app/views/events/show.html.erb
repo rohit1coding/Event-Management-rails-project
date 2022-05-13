@@ -10,8 +10,13 @@
     </u></b>
     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took. 
   </p>
+  <% debug(params) %>
+  <% @tasks.inspect %>
+  <% @event.inspect %>
+  <%= render 'tasks/index' %>
   <p class="lead">
-    <%= link_to 'Edit', edit_event_path(@event),class:"btn btn-primary" %> &nbsp;&nbsp;&nbsp;
+    <%= link_to 'Add Task', new_event_task_path(@event),class:"btn btn-primary" %>
+    <%= link_to 'Edit Event', edit_event_path(@event),class:"btn btn-primary" %> &nbsp;&nbsp;&nbsp;
     <%= link_to 'Back', events_path,class:"btn btn-primary" %>
   </p>
 </div>

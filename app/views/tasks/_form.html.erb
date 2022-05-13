@@ -1,0 +1,11 @@
+<%= form_with(model: [Event.find(params[:event_id]), task]) do |f| %>
+  <% if task.errors.any? %>
+    <%= render 'alerts/alert_multiply_msg', error_messages: task %>
+  <% end %>
+  <div class="field form-group">
+    <%= f.text_field :name,class:"form-control",placeholder:"Task Name" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", class:"btn btn-primary my-2" %>
+  </div>
+<% end %>

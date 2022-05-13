@@ -1,0 +1,26 @@
+<h1 class="text-light bg-secondary p-2 text-center">Task List</h1>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"> Task Name </th>
+      <th scope="col"> Event_ID </th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.event_id %></td>
+        <td><%= link_to 'Show', event_task_path(task.event_id,task.id),class:"btn btn-primary" %></td>
+        <% if true %>
+          <td><%= link_to 'Edit', edit_event_task_path(task.event_id,task.id),class:"btn btn-primary" %></td>
+        <% end %>
+        <td><%= link_to 'Delete', event_task_path(task.event_id,task.id), method: :delete, data: { confirm: 'Are you sure want to delete this task?' },class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

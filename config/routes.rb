@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
-  #Events
-  # get 'events', to:'events#index'
-  # get 'events/new', to: 'events#new'
-
   resources :users
-  resources :events
+  # resources :events
+  # resources :tasks
+
+  resources :events do
+    resources :tasks
+  end
 end

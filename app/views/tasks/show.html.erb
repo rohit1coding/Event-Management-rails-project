@@ -1,0 +1,18 @@
+<div class="jumbotron text-dark bg-light p-4 text-center">
+  <h2 class="card-header"> Task </h2>
+  <h3 class="task pt-3">
+    <%= @task.name %>
+    <%= @task.event_id %>
+  </h3>
+  <hr class="my-4">
+  <p>
+    <b><u> 
+    Description:
+    </u></b>
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took. 
+  </p>
+  <p class="lead">
+    <%= link_to 'Edit', edit_event_task_path(@task.event_id,@task.id),class:"btn btn-primary" %> &nbsp;&nbsp;&nbsp;
+    <%= link_to 'Back', event_path(@task.event_id),class:"btn btn-primary" %>
+  </p>
+</div>

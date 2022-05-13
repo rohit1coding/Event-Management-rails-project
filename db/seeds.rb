@@ -10,3 +10,8 @@
 #   user.events.create(name: "Picknik :- #{user.id}")
 #   user.events.create(name: "Trip :- #{user.id}")
 # end
+
+# Event.all.each do |event|
+#   event.tasks.create(name: "Picknik plan :- #{event.id}").save
+#   event.tasks.create(name: "Trip plan:- #{event.id}").save
+# end

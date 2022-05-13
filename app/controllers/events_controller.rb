@@ -12,7 +12,7 @@ class EventsController < ApplicationController
       @event = current_user.events.new(event_params)
       if @event.save
         flash[:notice] = "Event #{@event.name} successfully created"
-        redirect_to events_path
+        redirect_to @event
       else
         flash[:alert] = "Something went wrong"
         render 'new'
@@ -27,7 +27,7 @@ class EventsController < ApplicationController
       current_event
       if @event.update(event_params)
         flash[:notice] = "Event successfully Updated!"
-        redirect_to 'events_path'
+        redirect_to @event
       else
         flash[:alert] = "Something went wrong"
         render 'edit'
@@ -36,17 +36,30 @@ class EventsController < ApplicationController
     
     def show
       current_event
+      @tasks = Task.where(event_id: @event.id)
     end
 
     def destroy
       current_event
       @name = @event.name
+      delete_current_event_task
       @event.destroy
       respond_to do |format|
-        format.html { redirect_to events_path, alert: "Event #{@name} was successfully deleted." }
+        format.html { redirect_to @event, alert: "Event #{@name} was successfully deleted." }
       end
     end
     
+    def current_event_task
+      @tasks = Task.where(event_id: params[:id])
+    end
+    
+    def delete_current_event_task
+      current_event_task
+      @tasks.each do |task|
+        task.destroy
+      end
+    end
+
     def current_event
       @event = Event.find(params[:id])
     end

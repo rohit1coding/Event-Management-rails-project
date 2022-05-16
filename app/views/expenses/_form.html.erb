@@ -1,0 +1,14 @@
+<%= form_with(model: [@event, @task, expense]) do |f| %>
+  <% if expense.errors.any? %>
+    <%= render 'alerts/alert_multiply_msg', error_messages: expense %>
+  <% end %>
+  <div class="field form-group">
+    <%= f.text_field :name,class:"form-control",placeholder:"Expense Name" %>
+  </div>
+   <div class="field form-group">
+    <%= f.number_field :amount,class:"form-control",placeholder:"Expense Amount" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", class:"btn btn-primary my-2" %>
+  </div>
+<% end %>

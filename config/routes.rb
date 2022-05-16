@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   # resources :tasks
 
   resources :events do
-    resources :tasks
+    resources :tasks do 
+      resources :expenses
+    end
   end
 end

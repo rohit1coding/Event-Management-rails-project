@@ -15,3 +15,12 @@
 #   event.tasks.create(name: "Picknik plan :- #{event.id}").save
 #   event.tasks.create(name: "Trip plan:- #{event.id}").save
 # end
+
+# <%= debug(params) %>
+# <%= @tasks.inspect %>
+# <%= @event.inspect %>
+
+# Task.all.each do |task|
+#   task.expenses.create(name: "Expense :- #{task.id}", amount: 5000).save
+#   task.expenses.create(name: "budget- #{task.id}", amount: 10000).save
+# end

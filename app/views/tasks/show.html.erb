@@ -11,8 +11,9 @@
     </u></b>
     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took. 
   </p>
+  <%= render 'expenses/index' %>
   <p class="lead">
-    <%= link_to 'Edit', edit_event_task_path(@task.event_id,@task.id),class:"btn btn-primary" %> &nbsp;&nbsp;&nbsp;
-    <%= link_to 'Back', event_path(@task.event_id),class:"btn btn-primary" %>
+    <%= link_to 'Add Expense', new_event_task_expense_path(@event, @task),class:"btn btn-primary" %>
+    <%= link_to 'Back', @event,class:"btn btn-primary" %>
   </p>
 </div>

@@ -36,25 +36,21 @@ class EventsController < ApplicationController
     
     def show
       current_event
-      @tasks = Task.where(event_id: @event.id)
+      @tasks = @event.tasks.all
     end
 
     def destroy
       current_event
       @name = @event.name
-      delete_current_event_task
+      destroy_current_event_tasks
       @event.destroy
       respond_to do |format|
         format.html { redirect_to @event, alert: "Event #{@name} was successfully deleted." }
       end
     end
     
-    def current_event_task
-      @tasks = Task.where(event_id: params[:id])
-    end
-    
-    def delete_current_event_task
-      current_event_task
+    def destroy_current_event_tasks
+      @tasks = current_event.tasks.all
       @tasks.each do |task|
         task.destroy
       end

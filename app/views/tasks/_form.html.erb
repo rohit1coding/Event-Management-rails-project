@@ -1,4 +1,4 @@
-<%= form_with(model: [Event.find(params[:event_id]), task]) do |f| %>
+<%= form_with(model: [@event, task]) do |f| %>
   <% if task.errors.any? %>
     <%= render 'alerts/alert_multiply_msg', error_messages: task %>
   <% end %>

@@ -1,27 +1,21 @@
-<%= link_to 'Create Event', 'events/new',class:"btn btn-primary p-2" %> <br /> <br />
 <h1 class="text-light bg-secondary p-2 text-center">Event List</h1>
-<table class="table table-striped">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col"> Event Name </th>
-      <th scope="col"> User_ID </th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.name %></td>
-        <td><%= event.user_id %></td>
-        <td><%= link_to 'Show', event,class:"btn btn-primary" %></td>
-        <% if true %>
-          <td><%= link_to 'Edit', edit_event_path(event),class:"btn btn-primary" %></td>
-        <% end %>
-        <td><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure want to delete this event?' },class:"btn btn-danger" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<%= link_to 'Create Event', 'events/new',class:"btn btn-primary p-2" %> 
+<hr />
+<ul class="events">
+  <% @events.each do |event| %>
+    <li class="event card">
+      <h4> <u> Event </u> </h4>
+      <h5><%= event.name %></h5>
+      <p> 
+        Created at:- 
+        <%= event.created_at.strftime("%d-%m-%y") %>
+      </p>
+      <p>
+        <%= link_to 'Show', event,class:"btn btn-primary m-1" %>
+        <%= link_to 'Edit', edit_event_path(event),class:"btn btn-primary m-1" %> 
+        <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure want to delete this event?' },class:"btn btn-danger m-1" %>
+      </p>
+    </li>
+    <hr />
+  <% end %>
+</ul>

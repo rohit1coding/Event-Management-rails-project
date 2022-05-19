@@ -6,7 +6,7 @@
     <%= f.text_field :name,class:"form-control",placeholder:"Expense Name" %>
   </div>
    <div class="field form-group">
-    <%= f.number_field :amount,class:"form-control",placeholder:"Expense Amount" %>
+    <%= f.number_field :amount,class:"form-control",placeholder:"Expense Amount",min:"0" %>
   </div>
   <div class="actions">
     <%= f.submit "Submit", class:"btn btn-primary my-2" %>

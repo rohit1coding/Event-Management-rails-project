@@ -1,22 +1,16 @@
-<div class="jumbotron text-dark bg-light p-4 text-center">
+<div class="jumbotron text-dark bg-light p-4 text-center card event-details-card">
   <h2 class="card-header"> Event </h2>
   <h3 class="event pt-3">
     <%= @event.name %>
   </h3>
-  <hr class="my-4">
-  <p>
-    <b><u> 
-    Description:
-    </u></b>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took. 
+  <p> 
+    Created at:- 
+    <%= @event.created_at.strftime("%d-%m-%y") %>
   </p>
-  <% debug(params) %>
-  <% @tasks.inspect %>
-  <% @event.inspect %>
-  <%= render 'tasks/index' %>
-  <p class="lead">
-    <%= link_to 'Add Task', new_event_task_path(@event),class:"btn btn-primary" %>
-    <%= link_to 'Edit Event', edit_event_path(@event),class:"btn btn-primary" %> &nbsp;&nbsp;&nbsp;
-    <%= link_to 'Back', events_path,class:"btn btn-primary" %>
+  <p> 
+    Last Updated at:- 
+    <%= @event.updated_at.strftime("%d-%m-%y") %>
   </p>
 </div>
+  <hr/>
+  <%= render 'tasks/index' %>

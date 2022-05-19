@@ -1,19 +1,45 @@
-<div class="jumbotron text-dark bg-light p-4 text-center">
+<div class="jumbotron text-dark bg-light p-4 text-center task-details-card card">
   <h2 class="card-header"> Task </h2>
   <h3 class="task pt-3">
     <%= @task.name %>
-    <%= @task.event_id %>
   </h3>
-  <hr class="my-4">
-  <p>
-    <b><u> 
-    Description:
-    </u></b>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took. 
+    <% if @task.completed %>
+      <h4 class="text-success"> Completed </h4> 
+    <% else %>
+      <h4 class="text-warning"> Incomplete</h4>
+    <% end %>
+  <hr />
+  <p> 
+    Deadline:- 
+    <% if !!@task.deadline %>
+      <%= @task.deadline.strftime("%d-%m-%y: %H:%M") %>
+    <% else %>
+      Not Scheduled
+    <% end %>
+  <% if !!@task.user_id %>
+    <h6 class="text-primary"> Assigned to: <%= User.find(@task.user_id).name %>  </h6>
+  <% end %> 
   </p>
-  <%= render 'expenses/index' %>
-  <p class="lead">
-    <%= link_to 'Add Expense', new_event_task_expense_path(@event, @task),class:"btn btn-primary" %>
-    <%= link_to 'Back', @event,class:"btn btn-primary" %>
+  <p> 
+    Event:- 
+    <%= @event.name %>
+  </p>
+  <p> 
+    Total Expenses:- 
+    &#8377;<%= @total_expenses %>
+  </p>
+  <p> 
+    Created at:- 
+    <%= @task.created_at.strftime("%d-%m-%y") %>
+  </p>
+  <p> 
+    Last Updated at:- 
+    <%= @task.updated_at.strftime("%d-%m-%y") %>
+  </p>
+  <%= render 'tasks/task_completed?', task:@task %>
+  <p>
+    <%= link_to 'Assign to other user', [@event, @task,:allocate],class:"btn btn-primary mt-3" %>
   </p>
 </div>
+  <hr />
+  <%= render 'expenses/index' %>

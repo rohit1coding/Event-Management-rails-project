@@ -1,0 +1,5 @@
+<% if task.completed %>
+  <%= button_to 'mark as incomplete', [@event, task,:is_completed], method: :get, class:"btn btn-warning" %>
+<% else %>
+  <%= button_to 'mark as completed', [@event, task,:is_completed], method: :get,class:"btn btn-success" %>
+<% end %>

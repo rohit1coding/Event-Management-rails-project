@@ -1,23 +1,7 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-/* $screen-size: 1400px; */
-
 html {
   --screen-size: 1400px;
   --card-max-width: 600px;
+  --detail-card-max-width: 1000px;
   font-size: 20px;
 }
 .container {
@@ -55,7 +39,14 @@ html {
   border: 1px solid rgb(5, 14, 1);
   border-radius: 25px;
   text-align: center;
-  background-color: gainsboro;
+  /* background-color: gainsboro; */
+  background-color: white;
+  box-shadow: 5px 5px 5px slategrey;
+}
+.event-details-card,
+.task-details-card,
+.expense-details-card {
+  max-width: var(--detail-card-max-width);
 }
 .card-header {
   text-align: center;
@@ -73,7 +64,18 @@ html {
 }
 /* bootstrap btn  */
 .btn {
-  /* border-radius: 10px !important; */
+}
+.btn-back {
+  width: fit-content;
+  text-align: left;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+p {
+  line-height: 20px;
 }
 @media only screen and (max-width: 767px) {
   .navbar {

@@ -12,7 +12,12 @@ Rails.application.routes.draw do
   # resources :tasks
 
   resources :events do
-    resources :tasks do 
+    resources :tasks do
+      get 'form_deadline', to: 'tasks#form_deadline'
+      get 'is_completed', to: 'tasks#is_completed'
+      get 'allocate', to: 'tasks#allocate'
+      get 'deallocate_user', to: 'tasks#deallocate_user'
+      get 'change', to: 'tasks#change'
       resources :expenses
     end
   end

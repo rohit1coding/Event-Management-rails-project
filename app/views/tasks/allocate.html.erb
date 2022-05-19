@@ -1,0 +1,16 @@
+<%= form_with(model: [@event, @task]) do |f| %>
+  <% if @task.errors.any? %>
+    <%= render 'alerts/alert_multiply_msg', error_messages: @task %>
+  <% end %>
+  <div class="card">
+    <h3> Allocate Task </h3>
+    <div class="field form-group my-2">
+      <%= f.label :'Select User' %>
+      <%= f.select :user_id, @users.map{ |u| [u.name, u.id]} %>
+    </div>
+    <p>
+      <%= button_to 'Submit', root_path, method: :get, class:"btn btn-primary m-1" %>
+    </p>
+    <%= link_to 'Back', @event,class:"btn btn-dark btn-back" %>
+  </div>
+<% end %>

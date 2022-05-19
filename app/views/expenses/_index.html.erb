@@ -1,27 +1,28 @@
-<h1 class="text-light bg-secondary p-2 text-center">Expenses List</h1>
-<table class="table table-striped">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col"> Expense Name </th>
-      <th scope="col"> Amount </th>
-      <th scope="col"> Task_ID </th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @expenses.each do |expense| %>
-      <tr>
-        <td><%= expense.name %></td>
-        <td><%= expense.amount %></td>
-        <td><%= expense.task_id %></td>
-        <td><%= link_to 'Show', [@event, @task, expense],class:"btn btn-primary" %></td>
-        <% if true %>
-          <td><%= link_to 'Edit', edit_event_task_expense_path(@event, @task, expense),class:"btn btn-primary" %></td>
-        <% end %>
-        <td><%= link_to 'Delete', event_task_expense_path(@event,@task, expense), method: :delete, data: { confirm: 'Are you sure want to delete this task?' },class:"btn btn-danger" %></td>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<h3 class="text-light bg-secondary p-2 text-center">Expenses List</h3>
+<p class="lead">
+  <%= link_to 'Add Expense', new_event_task_expense_path(@event, @task),class:"btn btn-primary m-2" %>
+  <%= link_to 'Back', @event,class:"btn btn-dark m-2" %>
+</p>
+<hr />
+<ul class="expenses">
+  <% @expenses.each do |expense| %>
+    <li class="expense card">
+      <h5>  
+        <%= expense.name %> 
+      </h5>
+      <h5>  
+        Amount:- &#8377;<%= expense.amount %> 
+      </h5>
+      <p> 
+        Created at:- 
+        <%= expense.created_at.strftime("%d-%m-%y") %>
+      </p>
+      <p>
+        <%= link_to 'Show', [@event, @task, expense],class:"btn btn-primary m-1" %>
+        <%= link_to 'Edit', edit_event_task_expense_path(@event, @task, expense),class:"btn btn-primary m-1" %>
+        <%= link_to 'Delete', event_task_expense_path(@event,@task, expense), method: :delete, data: { confirm: 'Are you sure want to delete this task?' },class:"btn btn-danger m-1" %>
+      </p>
+    </li>
+    <hr />
+  <% end %>
+</ul>

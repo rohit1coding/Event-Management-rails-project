@@ -1,3 +1,5 @@
-<h1>Editing Expense</h1>
-<%= render 'form', expense: @expense %>
-<%= link_to 'Back', [@event, @task],class:"btn btn-primary" %>
+<div class="card">
+  <h2 class="card-header">Editing Expense</h2>
+  <%= render 'form', expense: @expense %>
+  <%= link_to 'Back', [@event, @task],class:"btn btn-dark btn-back" %>
+</div>

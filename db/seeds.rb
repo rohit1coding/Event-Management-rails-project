@@ -24,3 +24,8 @@
 #   task.expenses.create(name: "Expense :- #{task.id}", amount: 5000).save
 #   task.expenses.create(name: "budget- #{task.id}", amount: 10000).save
 # end
+
+# Event.all.each do |event|
+#   event.tasks.first.update(completed: true)
+#   event.tasks.last.update(completed: false)
+# end

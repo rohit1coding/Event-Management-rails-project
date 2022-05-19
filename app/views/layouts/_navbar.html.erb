@@ -8,10 +8,10 @@
       <ul class="navbar-nav navbar-right">
         <% if logged_in %>
           <li class="nav-item">
-            <%= link_to 'Event', root_path, class:"nav-link active" %>
+            <%= link_to 'Event', events_path, class:"nav-link active" %>
           </li>
           <li class="nav-item">
-            <%= link_to current_user.name, root_path, class:"nav-link active" %>
+            <%= link_to current_user.name, events_path, class:"nav-link active" %>
           </li>
           <li class="nav-item">
             <%= link_to 'Logout', logout_path, method: :delete, class:"nav-link active btn btn-danger" %>

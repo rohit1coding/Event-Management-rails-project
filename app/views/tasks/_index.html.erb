@@ -1,26 +1,49 @@
-<h1 class="text-light bg-secondary p-2 text-center">Task List</h1>
-<table class="table table-striped">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col"> Task Name </th>
-      <th scope="col"> Event_ID </th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.name %></td>
-        <td><%= task.event_id %></td>
-        <td><%= link_to 'Show', [@event, task],class:"btn btn-primary" %></td>
-        <% if true %>
-          <td><%= link_to 'Edit', edit_event_task_path(@event, task),class:"btn btn-primary" %></td>
+<h3 class="text-light bg-secondary p-2 text-center">Tasks List</h3>
+<p class="lead">
+  <%= link_to 'Add Task', new_event_task_path(@event),class:"btn btn-primary m-2" %>
+  <%= link_to 'Back', events_path,class:"btn btn-dark m-2" %>
+</p>
+<hr />
+<ul class="tasks">
+  <% @tasks.each do |task| %>
+    <li class="task card">
+      <h4>Task</h4>
+      <h5><%= task.name %></h5>
+      <% if task.completed %>
+        <h6 class="text-success"> Completed </h6> 
+      <% else %>
+        <h6 class="text-warning"> Incomplete</h6>
+      <% end %>
+      <% if !!task.user_id %>
+        <h6 class="text-primary"> Assigned to: <%= User.find(task.user_id).name %>  </h6> 
+        <p>
+            <%= button_to 'Deallocate', [@event, task,:deallocate_user], method: :get,class:"btn btn-warning" %>
+        </p>
+        <% else %>
+          <p>
+            <%= link_to 'Allocate User', [@event, task,:allocate],class:"btn btn-primary mt-3" %>
+          </p>
+      <% end %>
+      <p> 
+        Created at:- 
+        <%= task.created_at.strftime("%d-%m-%y") %>
+      </p>
+      <p> 
+        Deadline:- 
+        <% if !!task.deadline %>
+          <%= task.deadline.strftime("%d-%m-%y: %H:%M") %> <br />
+          <%= link_to 'Change deadline', [@event, task,:form_deadline],class:"btn btn-primary mt-3" %>
+        <% else %>
+          Not Scheduled <br/>
+        <%= link_to 'Add deadline', [@event, task,:form_deadline],class:"btn btn-primary mt-3" %>
         <% end %>
-        <td><%= link_to 'Delete', event_task_path(@event,task), method: :delete, data: { confirm: 'Are you sure want to delete this task?' },class:"btn btn-danger" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+      </p>
+      <p>
+        <%= link_to 'Show', [@event, task],class:"btn btn-primary m-1" %>
+        <%= link_to 'Edit', edit_event_task_path(@event, task),class:"btn btn-primary m-1" %> 
+        <%= link_to 'Delete', event_task_path(@event,task), method: :delete, data: { confirm: 'Are you sure want to delete this task?' },class:"btn btn-danger m-1" %>
+      </p>
+    </li>
+    <hr />
+  <% end %>
+</ul>

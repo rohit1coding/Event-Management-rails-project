@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
   before_action :authenticate_user, :current_event
   def index 
-    # @tasks = Task.all
     @tasks = @event.tasks.all
   end
 
@@ -10,7 +9,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    # @task = Task.new(name: task_params[:name], event_id: params[:event_id])
     @task = @event.tasks.new(task_params)
       if @task.save
         flash[:notice] = "Task #{@task.name} successfully created"
@@ -23,7 +21,14 @@ class TasksController < ApplicationController
 
   def show 
     current_task
+    if !!@task.deadline && !@task.completed && @task.deadline < Date.today
+      flash[:alert] = "Deadline passed for task #{@task.name}"
+    end
     @expenses = current_task.expenses.all
+    @total_expenses = 0
+    @expenses.each do |expense|
+      @total_expenses = @total_expenses + expense.amount
+    end
   end
 
   def edit 
@@ -31,6 +36,7 @@ class TasksController < ApplicationController
   end
 
   def update
+    puts params
     current_task
     if @task.update(task_params)
       flash[:notice] = "Task successfully Updated!"
@@ -51,6 +57,29 @@ class TasksController < ApplicationController
     end
   end
 
+  def is_completed
+    @task = @event.tasks.find(params[:task_id])
+    @is_completed = !@task.completed
+    @task.update(completed: @is_completed)
+    redirect_to [@event,@task]
+  end
+  
+  def allocate 
+    @task = @event.tasks.find(params[:task_id])
+    @users = User.where.not(id:session[:user_id])
+  end
+
+  def deallocate_user
+    puts params
+    @task = @event.tasks.find(params[:task_id])
+    @task.update(user_id: nil)
+    redirect_to @event
+  end
+
+  def form_deadline 
+    @task = @event.tasks.find(params[:task_id])
+  end
+
   def current_event
     @event = Event.find(params[:event_id])
   end
@@ -58,8 +87,14 @@ class TasksController < ApplicationController
   def current_task
     @task = @event.tasks.find(params[:id])
   end
+
   def task_params
-    params.require(:task).permit(:name)
+    params.require(:task).permit(:name,:deadline, :user_id)
+  end
+
+  def change
+    puts task_params
+    redirect_to [@event, @task, :show]
   end
 
   def destroy_current_task_expenses
@@ -68,4 +103,5 @@ class TasksController < ApplicationController
       expense.destroy
     end
   end
+
 end

@@ -10,11 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_092154) do
+ActiveRecord::Schema.define(version: 2022_05_22_204949) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
     t.string "name"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_events_on_user_id"
@@ -23,16 +26,30 @@ ActiveRecord::Schema.define(version: 2022_05_18_092154) do
   create_table "expenses", force: :cascade do |t|
     t.string "name"
     t.integer "amount"
-    t.integer "task_id"
+    t.bigint "task_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["task_id"], name: "index_expenses_on_task_id"
   end
 
+  create_table "news", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "name"
     t.boolean "completed", default: false
-    t.integer "event_id"
+    t.bigint "event_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deadline"

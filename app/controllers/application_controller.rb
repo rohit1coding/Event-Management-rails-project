@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def generate_notification(message, admin_id, user_id, event_id, task_id)
+    @notification = Notification.new(message:message, admin_id:admin_id, user_id:user_id, event_id: event_id, task_id: task_id)
+    @notification.save
+  end
 end

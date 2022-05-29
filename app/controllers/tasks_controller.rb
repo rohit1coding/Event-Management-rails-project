@@ -70,9 +70,15 @@ class TasksController < ApplicationController
   end
 
   def deallocate_user
-    puts params
     @task = @event.tasks.find(params[:task_id])
+    @message = "#{@current_user.name} removed you from the task #{@task.name}"
+    @admin_id = session[:user_id]
+    @user_id = @task.user_id
+    @event_id = @event.id
+    @task_id = @task.id
     @task.update(user_id: nil)
+    generate_notification(@message, @admin_id, @user_id, @event_id, @task_id)
+    flash[:notice] = "A notification has been sent to #{User.find(@user_id).name}!"
     redirect_to @event
   end
 

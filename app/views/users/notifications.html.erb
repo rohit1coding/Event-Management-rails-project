@@ -1,0 +1,26 @@
+<h1 class=" bg-secondary p-2 text-center">Notification List</h1>
+    <%= button_to 'Mark all as read', mark_all_as_read_path, method: :get,class:"btn btn-warning" %>
+<%# <hr /> %>
+<ul class="user_notifications">
+  <% @notifications.each do |notification| %>
+    <%= link_to event_task_path(notification.event_id,notification.task_id) do %>
+    <% if !notification.is_read %>
+      <li class="unread_message px-3 py-2 my-2">
+        <p>
+          <%= notification.message %>
+          on
+          <%= notification.created_at %>
+        </p>
+      </li>
+    <% else %>
+      <li class="read_message px-3 py-2 my-2">
+        <p>
+          <%= notification.message %>
+          on
+          <%= notification.created_at %>
+        </p>
+      </li>
+    <% end %>
+    <% end %>
+  <% end %>
+</ul>

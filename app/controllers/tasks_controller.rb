@@ -37,9 +37,15 @@ class TasksController < ApplicationController
 
   def update
     puts params
-    current_task
+    @before_update_task = current_task.user_id
     if @task.update(task_params)
-      flash[:notice] = "Task successfully Updated!"
+      if(!@before_update_task && !!current_task.user_id)
+        @message = "#{@current_user.name} added you in the task #{@task.name}"
+        generate_notification(@message, current_user.id, @task.user_id, @event.id, @task.id)
+        flash[:notice] = "User Allocated Sussessfully!"
+      else
+        flash[:notice] = "Task successfully Updated!"
+      end
       redirect_to [@event, @task]
     else
       flash[:alert] = "Something went wrong"

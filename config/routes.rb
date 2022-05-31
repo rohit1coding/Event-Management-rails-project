@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+  get 'notifications', to: 'users#notifications'
+  get 'mark_all_as_read', to: 'users#mark_all_as_read'
 
   resources :users
   # resources :events

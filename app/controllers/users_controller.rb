@@ -16,4 +16,17 @@ class UsersController < ApplicationController
   def user_params 
     params.require(:user).permit(:name, :email, :password)
   end
+
+  def notifications
+    @notifications = current_user.notifications.all.reverse
+  end
+  
+  def mark_all_as_read
+    @notifications =current_user.notifications.where(is_read: false)
+    @notifications.each do |notification|
+      notification.update(is_read:true)
+    end
+    redirect_to notifications_path
+  end
+  
 end

@@ -80,6 +80,12 @@ ul {
   margin: 0;
   padding: 0;
 }
+.user_notifications {
+  list-style-type: circle;
+}
+.user_notifications .unread_message {
+  background-color: lightgray;
+}
 p {
   line-height: 20px;
 }

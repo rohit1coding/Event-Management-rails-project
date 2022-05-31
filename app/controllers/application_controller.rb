@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in
+  helper_method :current_user, :logged_in, :new_notification_count, :notifications
 
   def current_user
     begin
@@ -25,5 +25,13 @@ class ApplicationController < ActionController::Base
   def generate_notification(message, admin_id, user_id, event_id, task_id)
     @notification = Notification.new(message:message, admin_id:admin_id, user_id:user_id, event_id: event_id, task_id: task_id)
     @notification.save
+  end
+
+  def notifications
+    @notifications = current_user.notifications.all 
+  end
+
+  def new_notification_count
+    @notifications_count =current_user.notifications.where(is_read: false).count
   end
 end

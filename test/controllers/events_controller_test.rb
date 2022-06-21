@@ -1,7 +1,14 @@
 require "test_helper"
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test "index action" do
+    get :index
+    assert_response :success
+  end
+
+  test "Create an Event" do
+    get :new
+    assert_response :success
+  end
+
 end

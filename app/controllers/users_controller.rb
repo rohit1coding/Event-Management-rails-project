@@ -13,6 +13,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def assigned_task
+    authenticate_user
+    @tasks = current_user.notifications.all
+  end
+
   def user_params 
     params.require(:user).permit(:name, :email, :password)
   end

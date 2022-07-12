@@ -1,0 +1,32 @@
+<h1> Hello </h1>
+<ul class="tasks">
+  <% @tasks.each do |task| %>
+    <li class="task card">
+      <% task = Task.find(task.task_id) %>
+      <h4>Task</h4>
+        <h5><%= task.name %></h5>
+        <% if task.completed %>
+          <h6 class="text-success"> Completed </h6> 
+        <% else %>
+          <h6 class="text-warning"> Incomplete</h6>
+        <% end %>
+        <% if !!task.user_id %>
+          <h6 class="text-primary"> Assigned to: <%= User.find(task.user_id).name %>  </h6> 
+        <% end %>
+        <p> 
+          Created at:- 
+          <%= task.created_at.strftime("%d-%m-%y") %>
+        </p>
+        <p> 
+          Deadline:- 
+          <% if !!task.deadline %>
+            <%= task.deadline.strftime("%d-%m-%y: %H:%M") %> <br />
+          <% else %>
+            Not Scheduled <br/>
+          <% end %>
+        </p>
+        <p>
+        <%= link_to 'Task Details', [Event.find(task.event_id), task],class:"btn btn-primary m-1" %>
+      </p>
+      </li>
+  <% end %>

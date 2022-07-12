@@ -12,13 +12,12 @@
   <p> 
     Deadline:- 
     <% if !!@task.deadline %>
-      <%= @task.deadline.strftime("%d-%m-%y: %H:%M") %>
+      <%= @task.deadline.strftime("%d-%m-%y: %H:%M") %> <br />
+      <%= link_to 'Change deadline', [@event, @task,:form_deadline],class:"btn btn-primary mt-3" %>
     <% else %>
-      Not Scheduled
+      Not Scheduled <br/>
+    <%= link_to 'Add deadline', [@event, @task,:form_deadline],class:"btn btn-primary mt-3" %>
     <% end %>
-  <% if !!@task.user_id %>
-    <h6 class="text-primary"> Assigned to: <%= User.find(@task.user_id).name %>  </h6>
-  <% end %> 
   </p>
   <p> 
     Event:- 

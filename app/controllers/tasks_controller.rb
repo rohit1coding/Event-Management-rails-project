@@ -67,6 +67,12 @@ class TasksController < ApplicationController
     @task = @event.tasks.find(params[:task_id])
     @is_completed = !@task.completed
     @task.update(completed: @is_completed)
+    if @is_completed 
+      @message = "#{@current_user.name} marked the task #{@task.name} as completed!"
+    else 
+      @message = "#{@current_user.name} marked the task #{@task.name} as incomplete!"
+    end
+    generate_notification(@message, current_user.id, @task.user_id, @event.id, @task.id)
     redirect_to [@event,@task]
   end
   

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   get 'notifications', to: 'users#notifications'
   get 'mark_all_as_read', to: 'users#mark_all_as_read'
-
+  get 'assigned_task', to:'users#assigned_task'
   resources :users
   # resources :events
   # resources :tasks

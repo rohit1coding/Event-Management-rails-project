@@ -14,6 +14,7 @@
       <% else %>
         <h6 class="text-warning"> Incomplete</h6>
       <% end %>
+      <h6 class="text-primary"> Self Assigned: <%= task.self_assign %>  </h6> 
       <% if !!task.user_id %>
         <h6 class="text-primary"> Assigned to: <%= User.find(task.user_id).name %>  </h6> 
         <p>

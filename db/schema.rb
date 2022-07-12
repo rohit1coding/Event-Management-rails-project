@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_29_203935) do
+ActiveRecord::Schema.define(version: 2022_07_12_102908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,13 +32,6 @@ ActiveRecord::Schema.define(version: 2022_05_29_203935) do
     t.index ["task_id"], name: "index_expenses_on_task_id"
   end
 
-  create_table "news", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "notifications", force: :cascade do |t|
     t.text "message"
     t.integer "event_id"
@@ -51,13 +44,6 @@ ActiveRecord::Schema.define(version: 2022_05_29_203935) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "tasks", force: :cascade do |t|
     t.string "name"
     t.boolean "completed", default: false
@@ -66,6 +52,7 @@ ActiveRecord::Schema.define(version: 2022_05_29_203935) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deadline"
     t.integer "user_id"
+    t.boolean "self_assign", default: false
     t.index ["event_id"], name: "index_tasks_on_event_id"
   end
 

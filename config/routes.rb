@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get 'allocate', to: 'tasks#allocate'
       get 'deallocate_user', to: 'tasks#deallocate_user'
       get 'change', to: 'tasks#change'
+      get 'self_assign', to: 'tasks#self_assign_task'
       resources :expenses
     end
   end

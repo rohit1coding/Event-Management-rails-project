@@ -76,6 +76,13 @@ class TasksController < ApplicationController
     redirect_to [@event,@task]
   end
   
+  def self_assign_task
+    @task = @event.tasks.find(params[:task_id])
+    @self_assign = !@task.self_assign
+    @task.update(self_assign: @self_assign)
+    redirect_to [@event, @task]
+  end
+
   def allocate 
     @task = @event.tasks.find(params[:task_id])
     @users = User.where.not(id:session[:user_id])

@@ -27,6 +27,26 @@
     Total Expenses:- 
     &#8377;<%= @total_expenses %>
   </p>
+  <h6 class="text-primary">
+    Self Assigned: <%= @task.self_assign %>  
+  </h6> 
+  <% if !!@task.user_id %>
+    <h6 class="text-primary">
+      Assigned to: <%= User.find(@task.user_id).name %>  
+    </h6> 
+  <% end %>
+  <%# Check User is valid admin or not %>
+  <% if current_user.id == Event.find(@task.event_id).user_id %>
+    <% if !@task.self_assign %>
+      <p>
+        <%= button_to 'Assign Self', [@event, @task,:self_assign], method: :get,class:"btn btn-warning" %>
+      </p>
+      <% else %>
+        <p>
+          <%= link_to 'Remove Self', [@event, @task,:self_assign],class:"btn btn-primary mt-3" %>
+        </p>
+    <% end %>
+  <% end %>
   <p> 
     Created at:- 
     <%= @task.created_at.strftime("%d-%m-%y") %>

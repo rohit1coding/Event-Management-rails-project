@@ -51,10 +51,18 @@
     Last Updated at:- 
     <%= @task.updated_at.strftime("%d-%m-%y") %>
   </p>
+  <% if !!@task.user_id %>
+    <h6 class="text-primary"> Assigned to: <%= User.find(@task.user_id).name %>  </h6> 
+    <p>
+      <%= button_to 'Deallocate', [@event, @task,:deallocate_user], method: :get,class:"btn btn-warning" %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to 'Allocate User', [@event, @task,:allocate],class:"btn btn-primary mt-3" %>
+    </p>
+  <% end %>
   <%= render 'tasks/task_completed?', task:@task %>
-  <p>
-    <%= link_to 'Assign to other user', [@event, @task,:allocate],class:"btn btn-primary mt-3" %>
-  </p>
+<%= link_to 'Back', @event,class:"btn btn-dark btn-back" %>
 </div>
-  <hr />
+<hr />
   <%# <%= render 'expenses/index' %> 

@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def assigned_task
     authenticate_user
-    @tasks = current_user.notifications.all
+    @tasks = AssignedTask.where(user_id: current_user.id)
   end
 
   def user_params 

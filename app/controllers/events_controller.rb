@@ -58,11 +58,15 @@ class EventsController < ApplicationController
   def destroy_current_event_tasks
     @tasks = current_event.tasks.all
     @tasks.each do |task|
-      @expenses = task.expenses.all
-      @expenses.each do |expense|
-        expense.destroy
+      @assigned_tasks = AssignedTask.where(task_id:task.id)
+      @assigned_tasks.each do |assigned_task|
+        assigned_task.destroy
       end
       task.destroy
+    end
+    @expenses = current_event.expenses.all
+    @expenses.each do |expense|
+      expense.destroy
     end
   end
 

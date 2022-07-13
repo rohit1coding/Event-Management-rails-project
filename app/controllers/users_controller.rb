@@ -1,5 +1,8 @@
 class UsersController < ApplicationController 
   def new
+    if !!session[:user_id]
+      redirect_to root_path
+    end
     @user = User.new
   end
   

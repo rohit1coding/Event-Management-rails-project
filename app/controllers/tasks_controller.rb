@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user, :current_event
   def index 
-    @tasks = @event.tasks.all
+    @tasks = @event.tasks.all.order(updated_at: :desc)
   end
 
   def new 

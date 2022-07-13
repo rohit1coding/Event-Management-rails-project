@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user
   
   def index
-    @events = current_user.events.all
+    @events = current_user.events.all.order(updated_at: :desc)
   end
 
   def new
@@ -37,8 +37,8 @@ class EventsController < ApplicationController
   
   def show
     current_event
-    @tasks = @event.tasks.all
-    @expenses = current_event.expenses.all
+    @tasks = @event.tasks.all.order(updated_at: :desc)
+    @expenses = current_event.expenses.all.order(updated_at: :desc)
     @total_expenses = 0
     @expenses.each do |expense|
       @total_expenses = @total_expenses + expense.amount

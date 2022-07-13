@@ -1,7 +1,7 @@
 class ExpensesController < ApplicationController
   before_action :authenticate_user, :current_event
   def index 
-    @expenses = @event.expenses.all
+    @expenses = @event.expenses.all.order(updated_at: :desc)
   end
 
   def new 

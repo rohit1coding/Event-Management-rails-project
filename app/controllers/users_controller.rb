@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def assigned_task
     authenticate_user
-    @tasks = AssignedTask.where(user_id: current_user.id)
+    @tasks = AssignedTask.where(user_id: current_user.id).order(updated_at: :desc)
   end
 
   def user_params 

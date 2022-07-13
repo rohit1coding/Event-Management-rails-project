@@ -38,6 +38,11 @@ class EventsController < ApplicationController
   def show
     current_event
     @tasks = @event.tasks.all
+    @expenses = current_event.expenses.all
+    @total_expenses = 0
+    @expenses.each do |expense|
+      @total_expenses = @total_expenses + expense.amount
+    end
   end
 
   def destroy

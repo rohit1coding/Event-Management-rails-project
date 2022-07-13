@@ -4,6 +4,10 @@
     <%= @event.name %>
   </h3>
   <p> 
+    Total Expenses:- 
+    <%= @total_expenses %>
+  </p>
+  <p> 
     Created at:- 
     <%= @event.created_at.strftime("%d-%m-%y") %>
   </p>
@@ -12,5 +16,12 @@
     <%= @event.updated_at.strftime("%d-%m-%y") %>
   </p>
 </div>
-  <hr/>
-  <%= render 'tasks/index' %>
+<hr/>
+<div class="d-flex">
+  <div class="item-1 p-2 flex-fill bd-highlight border border-right"> 
+    <%= render 'tasks/index' %>
+  </div>
+    <div class="item-1 p-2 flex-fill bd-highlight border border-left"> 
+      <%= render 'expenses/index' %>
+    </div>
+</div>

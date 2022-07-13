@@ -7,11 +7,6 @@
     Amount: <%= @expense.amount %>
   </h5>
   <p> 
-    Task:- 
-    <%= @task.name %>
-  </p>
-
-  <p> 
     Created at:- 
     <%= @expense.created_at.strftime("%d-%m-%y") %>
   </p>
@@ -21,7 +16,7 @@
   </p>
   <hr />
   <p class="lead">
-    <%= link_to 'Edit', edit_event_task_expense_path(@event, @task, @expense),class:"btn btn-primary" %> &nbsp;&nbsp;&nbsp;
-    <%= link_to 'Back', [@event, @task],class:"btn btn-dark" %>
+    <%= link_to 'Edit', edit_event_expense_path(@event, @expense),class:"btn btn-primary" %> &nbsp;&nbsp;&nbsp;
+    <%= link_to 'Back', @event,class:"btn btn-dark" %>
   </p>
 </div>

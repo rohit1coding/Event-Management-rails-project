@@ -24,11 +24,6 @@ class TasksController < ApplicationController
     if !!@task.deadline && !@task.completed && @task.deadline < Date.today
       flash[:alert] = "Deadline passed for task #{@task.name}"
     end
-    @expenses = current_task.expenses.all
-    @total_expenses = 0
-    @expenses.each do |expense|
-      @total_expenses = @total_expenses + expense.amount
-    end
   end
 
   def edit 
@@ -56,7 +51,6 @@ class TasksController < ApplicationController
   def destroy
     current_task
     @name = @task.name
-    destroy_current_task_expenses
     @task.destroy
     respond_to do |format|
       format.html { redirect_to @event, alert: "Task #{@name} was successfully deleted." }
@@ -120,13 +114,6 @@ class TasksController < ApplicationController
   def change
     puts task_params
     redirect_to [@event, @task, :show]
-  end
-
-  def destroy_current_task_expenses
-    @expenses = current_task.expenses.all
-    @expenses.each do |expense|
-      expense.destroy
-    end
   end
 
 end

@@ -3,7 +3,8 @@ class CreateExpenses < ActiveRecord::Migration[6.1]
     create_table :expenses do |t|
       t.string :name
       t.integer :amount
-      t.references :task, foreign_key: true
+      t.integer :task_id
+      t.references :event, foreign_key: true
       t.timestamps
     end
   end

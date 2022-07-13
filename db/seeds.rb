@@ -57,10 +57,10 @@ Event.all.each do |event|
   event.tasks.create(name: "Snax")
 end
 
-Task.all.each do |task|
-  task.expenses.create(name: "Travel", amount: 5000)
-  task.expenses.create(name: "Food", amount: 10000)
-  task.expenses.create(name: "Cold Drink", amount: 1400)
+Event.all.each do |event|
+  event.expenses.create(name: "Travel", amount: 5000)
+  event.expenses.create(name: "Food", amount: 10000)
+  event.expenses.create(name: "Cold Drink", amount: 1400)
 end
 
 Event.all.each do |event|

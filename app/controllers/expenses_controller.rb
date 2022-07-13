@@ -1,7 +1,7 @@
 class ExpensesController < ApplicationController
-  before_action :authenticate_user, :current_event, :current_task
+  before_action :authenticate_user, :current_event
   def index 
-    @expenses = @task.expenses.all
+    @expenses = @event.expenses.all
   end
 
   def new 
@@ -9,10 +9,10 @@ class ExpensesController < ApplicationController
   end
 
   def create 
-    @expense = @task.expenses.new(expense_params)
+    @expense = @event.expenses.new(expense_params)
      if @expense.save 
       flash[:notice] = "Expense #{@expense.name} successfully created"
-      redirect_to [@event, @task, @expense]
+      redirect_to [@event, @expense]
      else
       flash[:alert] = "Something went wrong"
       render 'new'
@@ -31,7 +31,7 @@ class ExpensesController < ApplicationController
     current_expense
     if @expense.update(expense_params)
       flash[:notice] = "Expense updated successfully"
-      redirect_to [@event, @task, @expense]
+      redirect_to [@event, @expense]
     else
       flash[:alert] = "Something went wrong"
       render 'edit'
@@ -43,7 +43,7 @@ class ExpensesController < ApplicationController
     @name = @expense.name
     @expense.destroy
     respond_to do |format|
-      format.html { redirect_to [@event, @task], alert: "Task #{@name} was successfully deleted." }
+      format.html { redirect_to @event, alert: "Expense #{@name} was successfully deleted." }
     end
   end
   
@@ -57,7 +57,7 @@ class ExpensesController < ApplicationController
   end
   
   def current_expense
-    @expense = @task.expenses.find(params[:id])
+    @expense = @event.expenses.find(params[:id])
   end
 
   def expense_params

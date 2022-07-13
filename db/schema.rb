@@ -26,10 +26,11 @@ ActiveRecord::Schema.define(version: 2022_07_12_102908) do
   create_table "expenses", force: :cascade do |t|
     t.string "name"
     t.integer "amount"
-    t.bigint "task_id"
+    t.integer "task_id"
+    t.bigint "event_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["task_id"], name: "index_expenses_on_task_id"
+    t.index ["event_id"], name: "index_expenses_on_event_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -65,7 +66,7 @@ ActiveRecord::Schema.define(version: 2022_07_12_102908) do
   end
 
   add_foreign_key "events", "users"
-  add_foreign_key "expenses", "tasks"
+  add_foreign_key "expenses", "events"
   add_foreign_key "notifications", "users"
   add_foreign_key "tasks", "events"
 end

@@ -23,10 +23,6 @@
     Event:- 
     <%= @event.name %>
   </p>
-  <p> 
-    Total Expenses:- 
-    &#8377;<%= @total_expenses %>
-  </p>
   <h6 class="text-primary">
     Self Assigned: <%= @task.self_assign %>  
   </h6> 
@@ -61,4 +57,4 @@
   </p>
 </div>
   <hr />
-  <%= render 'expenses/index' %>
+  <%# <%= render 'expenses/index' %> 

@@ -48,6 +48,7 @@ class EventsController < ApplicationController
   def destroy
     current_event
     @name = @event.name
+    destroy_current_event_expenses
     destroy_current_event_tasks
     @event.destroy
     respond_to do |format|
@@ -55,6 +56,13 @@ class EventsController < ApplicationController
     end
   end
   
+  def destroy_current_event_expenses
+    @expenses = current_event.expenses.all
+    @expenses.each do |expense|
+      expense.destroy
+    end
+  end
+
   def destroy_current_event_tasks
     @tasks = current_event.tasks.all
     @tasks.each do |task|
@@ -63,10 +71,6 @@ class EventsController < ApplicationController
         assigned_task.destroy
       end
       task.destroy
-    end
-    @expenses = current_event.expenses.all
-    @expenses.each do |expense|
-      expense.destroy
     end
   end
 

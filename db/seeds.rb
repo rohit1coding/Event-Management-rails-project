@@ -9,6 +9,10 @@ Notification.all.each do |notification|
   notification.destroy
 end
 
+AssignedTask.all.each do |assigned_task|
+  assigned_task.destroy
+end
+
 Expense.all.each do |expense|
   expense.destroy
 end

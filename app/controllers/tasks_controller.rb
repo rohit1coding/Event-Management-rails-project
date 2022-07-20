@@ -63,6 +63,7 @@ class TasksController < ApplicationController
 
   def destroy
     current_task
+    destroy_current_task_expenses
     @name = @task.name
     @assigned_tasks = AssignedTask.where(task_id:current_task.id)
     @assigned_tasks.each do |assigned_task|
@@ -74,6 +75,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy_current_task_expenses
+    @expenses =Expense.where(task_id: current_task.id)
+    @expenses.each do |expense|
+      expense.destroy
+    end
+  end
+  
   def is_completed
     @task = @event.tasks.find(params[:task_id])
     @is_completed = !@task.completed

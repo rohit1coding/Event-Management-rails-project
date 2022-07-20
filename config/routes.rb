@@ -22,6 +22,9 @@ Rails.application.routes.draw do
       get 'change', to: 'tasks#change'
       get 'self_assign', to: 'tasks#self_assign_task'
     end
-    resources :expenses
+    resources :expenses do 
+      get 'allocate_task', to: 'expenses#allocate_task'
+      get 'deallocate_task', to: 'expenses#deallocate_task'
+    end
   end
 end

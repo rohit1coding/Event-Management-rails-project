@@ -15,6 +15,9 @@
     Last Updated at:- 
     <%= @event.updated_at.strftime("%d-%m-%y") %>
   </p>
+  <p>
+    <%= link_to 'Edit', edit_event_path(@event),class:"btn btn-primary m-1" %> 
+  </p>
 </div>
 <hr/>
 <div class="d-flex">

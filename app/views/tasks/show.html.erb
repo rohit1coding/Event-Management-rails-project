@@ -23,9 +23,6 @@
     Event:- 
     <%= @event.name %>
   </p>
-  <h6 class="text-primary">
-    Self Assigned: <%= @task.self_assign %>  
-  </h6> 
   <% if !!@task.user_id %>
     <h6 class="text-primary">
       Assigned to: <%= User.find(@task.user_id).name %>  
@@ -51,18 +48,20 @@
     Last Updated at:- 
     <%= @task.updated_at.strftime("%d-%m-%y") %>
   </p>
-  <% if !!@task.user_id %>
-    <h6 class="text-primary"> Assigned to: <%= User.find(@task.user_id).name %>  </h6> 
-    <p>
-      <%= button_to 'Deallocate', [@event, @task,:deallocate_user], method: :get,class:"btn btn-warning" %>
-    </p>
-  <% else %>
-    <p>
-      <%= link_to 'Allocate User', [@event, @task,:allocate],class:"btn btn-primary mt-3" %>
-    </p>
+  <% if !@task.self_assign %>
+    <% if !!@task.user_id %>
+      <h6 class="text-primary"> Assigned to: <%= User.find(@task.user_id).name %>  </h6> 
+      <p>
+        <%= button_to 'Deallocate', [@event, @task,:deallocate_user], method: :get,class:"btn btn-warning" %>
+      </p>
+    <% else %>
+      <p>
+        <%= link_to 'Allocate User', [@event, @task,:allocate],class:"btn btn-primary mt-3" %>
+      </p>
+    <% end %>
   <% end %>
   <%= render 'tasks/task_completed?', task:@task %>
 <%= link_to 'Back', @event,class:"btn btn-dark btn-back" %>
 </div>
 <hr />
-  <%# <%= render 'expenses/index' %> 
+  <%= render 'expenses/index' %>

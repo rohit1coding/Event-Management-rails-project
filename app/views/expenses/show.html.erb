@@ -6,6 +6,17 @@
   <h5>
     Amount: <%= @expense.amount %>
   </h5>
+  <% if !!@expense.task_id %>
+    <h6 class="text-primary"> Belongs to Task: <%= Task.find(@expense.task_id).name %>  </h6> 
+    <p>
+      <%= button_to 'Deallocate Task', [@event, @expense,:deallocate_task], method: :get,class:"btn btn-warning" %>
+    </p>
+  <% end %>
+  <% if !@expense.task_id %>
+    <p>
+      <%= link_to 'Allocate Task', [@event, @expense,:allocate_task],class:"btn btn-primary mt-3" %>
+    </p>
+  <% end %>
   <p> 
     Created at:- 
     <%= @expense.created_at.strftime("%d-%m-%y") %>

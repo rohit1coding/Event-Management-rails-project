@@ -47,6 +47,17 @@ class ExpensesController < ApplicationController
     end
   end
   
+  def allocate_task
+    @expense = @event.expenses.find(params[:expense_id])
+    @tasks = Task.where(event_id: current_event.id)
+  end
+
+  def deallocate_task
+    @expense = @event.expenses.find(params[:expense_id])
+    @expense.update(task_id: nil)
+    redirect_to [@event, @expense]
+  end
+
   def current_event
     @event = Event.find(params[:event_id])
   end
@@ -61,6 +72,6 @@ class ExpensesController < ApplicationController
   end
 
   def expense_params
-    params.require(:expense).permit(:name, :amount)
+    params.require(:expense).permit(:name, :amount, :task_id)
   end
 end

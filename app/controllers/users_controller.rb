@@ -8,10 +8,12 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
-    if @user.save 
+    @password_confirmation = params[:user][:password_confirmation]
+    if @user.password == @password_confirmation && @user.save
       flash[:notice] = "Account created successfully."
       redirect_to login_path
     else
+      flash[:alert] = "Password mismatchted!"
       render 'new'
     end
   end

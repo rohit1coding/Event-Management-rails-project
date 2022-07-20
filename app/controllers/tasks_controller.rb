@@ -21,7 +21,8 @@ class TasksController < ApplicationController
 
   def show 
     current_task
-    if !!@task.deadline && !@task.completed && @task.deadline < Date.today
+    @expenses = current_event.expenses.where(task_id:current_task.id)
+    if !!@task.deadline && !@task.completed && @task.deadline <= Time.now
       flash[:alert] = "Deadline passed for task #{@task.name}"
     end
   end
@@ -31,8 +32,9 @@ class TasksController < ApplicationController
   end
 
   def update
-    puts params
+    # print params[:task][:deadline]
     @before_update_task = current_task.user_id
+    puts params[:task][:deadline]
     if @task.update(task_params)
       if(!@before_update_task && !!current_task.user_id)
         @message = "#{@current_user.name} added you in the task #{@task.name}"
@@ -88,7 +90,11 @@ class TasksController < ApplicationController
   def self_assign_task
     @task = @event.tasks.find(params[:task_id])
     @self_assign = !@task.self_assign
-    @task.update(self_assign: @self_assign)
+    if @self_assign
+      @task.update(self_assign: @self_assign,user_id:current_user.id) #self assign
+    else 
+      @task.update(self_assign: @self_assign,user_id:nil) #unassigned
+    end
     if @self_assign
       @assigned_task = AssignedTask.create(task_id:@task.id, admin_id:current_user.id, user_id: current_user.id)
       @assigned_task.save

@@ -14,16 +14,19 @@
       <% else %>
         <h6 class="text-warning"> Incomplete</h6>
       <% end %>
-      <h6 class="text-primary"> Self Assigned: <%= task.self_assign %>  </h6> 
       <% if !!task.user_id %>
         <h6 class="text-primary"> Assigned to: <%= User.find(task.user_id).name %>  </h6> 
-        <p>
-            <%= button_to 'Deallocate', [@event, task,:deallocate_user], method: :get,class:"btn btn-warning" %>
-        </p>
-        <% else %>
+      <% end %>
+      <% if !task.self_assign %>
+        <% if !!task.user_id %>
           <p>
-            <%= link_to 'Allocate User', [@event, task,:allocate],class:"btn btn-primary mt-3" %>
+              <%= button_to 'Deallocate', [@event, task,:deallocate_user], method: :get,class:"btn btn-warning" %>
           </p>
+          <% else %>
+            <p>
+              <%= link_to 'Allocate User', [@event, task,:allocate],class:"btn btn-primary mt-3" %>
+            </p>
+        <% end %>
       <% end %>
       <p> 
         Created at:- 
